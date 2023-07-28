@@ -1,0 +1,40 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:icon="@drawable/settings_24"
+        app:layout="@layout/title_pref"
+        app:title=""></PreferenceCategory>
+
+
+    <PreferenceCategory
+        app:allowDividerBelow="true"
+        app:title="Transactions"
+        app:icon="@drawable/transactions">
+
+
+        <SwitchPreferenceCompat
+            app:key="SaveBox"
+            app:summary="On check will keep track in deletion of transactions records"
+            app:disableDependentsState="true"
+            app:title="Save transactions" />
+
+        <SwitchPreferenceCompat
+            app:dependency="SaveBox"
+            app:key="DisplayDeletedTransactionBox"
+            app:summary="On check will display track of deleted transactions records"
+            app:title="Display deleted transactions" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:icon="@drawable/bell"
+        app:title="Notfications ">
+
+        <SwitchPreferenceCompat
+            app:key="notifcations"
+            app:title="Turn off notifcations" />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- Profile Picture -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profilePictureCard"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:elevation="8dp"
+            app:cardCornerRadius="60dp">
+
+            <ImageView
+                android:id="@+id/profilePicture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_pic"
+                app:srcCompat="@drawable/profile_pic" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Name -->
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profilePictureCard"
+            android:layout_centerHorizontal="true"
+            android:text="John Doe"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- Account Made -->
+        <TextView
+            android:id="@+id/accountMadeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameTextView"
+            android:layout_centerHorizontal="true"
+            android:text="Account Made: June 2023"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <!-- Credit Cards -->
+        <TextView
+            android:id="@+id/creditCardsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/accountMadeTextView"
+            android:layout_centerHorizontal="true"
+            android:text="Credit Cards: 2"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <!-- Locations -->
+        <TextView
+            android:id="@+id/locationsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/creditCardsTextView"
+            android:layout_centerHorizontal="true"
+            android:text="Locations: New York, London"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <!-- Personal Info -->
+        <TextView
+            android:id="@+id/personalInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/locationsTextView"
+            android:layout_centerHorizontal="true"
+            android:text="Personal Info: Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
