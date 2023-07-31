@@ -114,4 +114,37 @@ public class TransActionsRepository {
         }
     }
 
+
+
+    public LiveData<Transaction> getOldestTransactionOver7Days() {
+
+    MutableLiveData<Transaction> oldestTransactionLiveData = new MutableLiveData<>();
+
+    // Execute the AsyncTask to fetch the oldest transaction over 7 days
+        new GetOldestTransactionAsyncTask(transactionDao, oldestTransactionLiveData).execute();
+
+        return oldestTransactionLiveData;
+}
+
+private static class GetOldestTransactionAsyncTask extends AsyncTask<Void, Void, Transaction> {
+    private TransactionDB transDao;
+    private MutableLiveData<Transaction> oldestTransactionLiveData;
+
+    public GetOldestTransactionAsyncTask(TransactionDB transactionDao, MutableLiveData<Transaction> oldestTransactionLiveData) {
+        this.transDao = transactionDao;
+        this.oldestTransactionLiveData = oldestTransactionLiveData;
+    }
+
+    @Override
+    protected Transaction doInBackground(Void... voids) {
+        // Execute the query to get the oldest transaction over 7 days
+        return transDao.getOldestTransactionOver7Days();
+    }
+
+    @Override
+    protected void onPostExecute(Transaction transaction) {
+        // Post the result to the LiveData
+        oldestTransactionLiveData.postValue(transaction);
+    }
+}
 }

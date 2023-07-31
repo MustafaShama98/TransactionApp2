@@ -3,6 +3,7 @@ package com.example.AccountManagement;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +43,7 @@ public class TransactionListFrag extends Fragment implements TransactionAdapterL
     //used in fragment to create layout and inflate view (like mainActivity oncreate)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
         // Get the ViewModel instance from the MainActivity
         transactionViewModel = ((MainActivity) requireActivity()).transactionViewModel;
@@ -59,9 +62,14 @@ public class TransactionListFrag extends Fragment implements TransactionAdapterL
        // transactionList = transactionViewModel.getAll();
         // Observe LiveData changes in the ViewModel and update the Adapter
         transactionViewModel.getMutableAllTransactionList().observe(getViewLifecycleOwner(), transactions -> {
-            madapter.setTransactionList((ArrayList<Transaction>) transactions);
-           // madapter.notifyDataSetChanged();
-            // You can also call notifyDataSetChanged() here if necessary
+
+            if (transactions != null && !transactions.isEmpty()) {
+                madapter.setTransactionList((ArrayList<Transaction>) transactions);
+
+                //Log.d("print5",transactionViewModel.getTransactionsOver7Days().get(1).toString());
+;                // madapter.notifyDataSetChanged();
+                // You can also call notifyDataSetChanged() here if necessary
+            }
         });
 
         // Create the observer which updates the UI.
@@ -134,7 +142,8 @@ public class TransactionListFrag extends Fragment implements TransactionAdapterL
 
     @Override
     public void notifyOnDelete(ArrayList<Transaction> transaction) {
-      // transactionList.setValue(transaction);
+        transactionViewModel.getMutableAllTransactionList().setValue(transaction);
+
     }
 
 
@@ -152,6 +161,11 @@ public class TransactionListFrag extends Fragment implements TransactionAdapterL
     @Override
     public List<Transaction> getClosetTask(int day1, int month1, int year1, int hour1, int minute1) {
         return transactionViewModel.getClosetTask(day1, month1, year1, hour1, minute1);
+    }
+
+    @Override
+    public List<Transaction> getTransactionsOver7Days() {
+       return transactionViewModel.getTransactionsOver7Days();
     }
 
     public void transactionTypeUI(TextView textView) {

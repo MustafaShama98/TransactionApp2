@@ -104,7 +104,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
                     // Update the LiveData with the current list of transactions only
                     transactionViewModel.getMutableAllTransactionList().postValue(transactionViewModel.getAllTransactionList_normal());
-                    if(restoredDeletedTransactions != null)
+                   if(restoredDeletedTransactions != null)
+
                     // Remove restored deleted transactions from the database
                      for (Transaction transaction : restoredDeletedTransactions) {
                         transactionViewModel.delete(transaction);

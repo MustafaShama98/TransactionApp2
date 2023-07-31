@@ -41,7 +41,7 @@ public class ItemsRecycleAdapter extends RecyclerView.Adapter<ItemsRecycleAdapte
         fragListner1 = TransactionListFrag.fragListner;
         this.transactionList = new ArrayList<Transaction>();
         this.transactionListCallback = transactionCallback;
-
+      //  Log.d("print3", String.valueOf(transactionListCallback.getOldestTransactionOver7Days().toString()));
     }//ItemsRecycleAdapter
 
 
@@ -174,11 +174,12 @@ public class ItemsRecycleAdapter extends RecyclerView.Adapter<ItemsRecycleAdapte
                                         transactionListCallback.onTransactionDelete(transactionList.get(pos)); //deleting from db
 
                                         if (MainActivity.saveBoxValue) {
-
+                                         //   transactionList.get(pos).setDeleted(true);
                                             saveDeletedTransactions(transactionList.get(pos));
                                         }
-                                        // transactionList.remove(pos);
+                                      //  transactionList.remove(pos);
                                     }
+                                   // transactionListCallback.notifyOnDelete(transactionList);
                                    // notifyDataSetChanged();
                                    // notifyItemRemoved(pos);
                                   //   notifyItemRangeChanged(pos, transactionList.size());
@@ -206,16 +207,7 @@ public class ItemsRecycleAdapter extends RecyclerView.Adapter<ItemsRecycleAdapte
         }
     }//myviewHolder
 
-    //---------------------------------DB handler  -----------------
-/**  public void UpdateTaskList() {
 
-        ItemsRecycleAdapter.listner.transactionList = new ArrayList<>();
-        for(Transaction temp : all) {
-            ItemsRecycleAdapter.listner.transactionList.add(temp);
-        }
-        ItemsRecycleAdapter.listner.notifyDataSetChanged();
-    }
-**/
     public static void saveDeletedTransactions(Transaction transaction) {
         deletedTransactionList.add(transaction);
       //  transaction.setDeleted(true);

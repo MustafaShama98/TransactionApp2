@@ -32,9 +32,11 @@ public interface TransactionDB {
     @Insert(onConflict = REPLACE)
     public void insert(Transaction transaction);
 
-    @Query("SELECT * FROM `Transaction` where year=:year1 And day =:day1 And month=:month1  And hour=:hour1 And minute=:minute1")
+    @Query("SELECT * FROM `Transaction` where type = 'Pending' and year=:year1 And day =:day1 And month=:month1  And hour=:hour1 And minute=:minute1")
     List<Transaction> getClosetTask(int day1, int month1 , int year1, int hour1, int minute1);
 
+    @Query("SELECT * FROM `Transaction` WHERE type = 'Sent' ")
+    Transaction getOldestTransactionOver7Days();
 
 
 }

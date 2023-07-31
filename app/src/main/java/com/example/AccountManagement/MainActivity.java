@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.AccountManagement.BrodcastHolder.BroadcastReceiverListner;
@@ -196,6 +197,12 @@ public class MainActivity extends AppCompatActivity implements TransactionListFr
     public List<Transaction> getClosetTask(int day1, int month1, int year1, int hour1, int minute1) {
         return null;
     }
+
+    @Override
+    public List<Transaction>  getTransactionsOver7Days() {
+        return transactionViewModel.getTransactionsOver7Days();
+    }
+
 
 
 }

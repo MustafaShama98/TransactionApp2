@@ -24,7 +24,7 @@ public  abstract class AppDB extends RoomDatabase { //singleton class
         if(instance==null){
             instance = Room.databaseBuilder(context.getApplicationContext(),AppDB.class,"bank-database")
                     .allowMainThreadQueries()
-                    .addMigrations(MIGRATION_2_3)
+                   // .addMigrations(MIGRATION_2_3)
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
                     .build();
@@ -78,6 +78,8 @@ public  abstract class AppDB extends RoomDatabase { //singleton class
          transactionDao.insert(new Transaction(23,"To: yy","Sent",false,24,7,2023,14,16));
          transactionDao.insert(new Transaction(345,"To: yy","Pending",false,25,7,2023,14,12));
          transactionDao.insert(new Transaction(12,"To: yy","Received",false,24,7,2023,14,13));
+         transactionDao.insert(new Transaction(5,"To: zz","Pending",false,20,7,2023,14,13));
+
          return null;
      }
  }
