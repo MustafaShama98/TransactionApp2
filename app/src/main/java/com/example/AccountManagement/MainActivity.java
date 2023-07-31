@@ -33,8 +33,13 @@ public class MainActivity extends AppCompatActivity implements TransactionListFr
     IntentFilter filter = new IntentFilter();
     TransactionViewModel transactionViewModel;
     BottomNavigationView bottomNavigationView;
-    public static boolean saveBoxValue = false, displayBox=false, notfiBoxValue = false ;
+    public static boolean saveBoxValue = false;
+    public static boolean displayBox=false;
+    private static boolean notfiBoxValue = false ;
 
+    public boolean isNotfiBoxValue() {
+        return notfiBoxValue;
+    }
 
 
     @Override
@@ -67,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements TransactionListFr
            // serviceIntent.putExtra("main_activity_instance", (CharSequence) this);
 
             startForegroundService(serviceIntent);
+
         }
     }
 

@@ -40,6 +40,7 @@ public class ForegroundService extends Service  {
     Intent Brodcastintent = new Intent();
     TransactionViewModel transactionViewModel;
     private TransactionAdapterListener mainActivityCallback;
+    private boolean shouldRunThread=true;
 
     @Override
     public void onCreate() {
@@ -55,26 +56,31 @@ public class ForegroundService extends Service  {
      onStartCommand ’ inside the service **/
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         // Start the service in the foreground
-        startForeground(1, buildNotification("No Reminders"));
 
+
+      
+        startForeground(1, buildNotification("No Reminders"));
         // Check for transactions with type "pending" and time passed 7 days
         new Thread(new Runnable() {
             @Override
+
+
             public void run() {
-                while (true) {
+                while (shouldRunThread) {
                     List<Transaction> allTransactions = mainActivity.getAllList();
 
-                    // Filter transactions that have passed over 7 days
+                    // Filter transactions that have passed over 7 days and notifications are enabled
                     List<Transaction> reminders = new ArrayList<>();
                     for (Transaction transaction : allTransactions) {
-                        Calendar transactionDate = Calendar.getInstance();
-                        transactionDate.set(transaction.getYear(), transaction.getMonth() - 1, transaction.getDay());
-                        if (transactionDate.getTimeInMillis() <= System.currentTimeMillis() - 7 * 24 * 60 * 60 * 1000
-                        && transaction.getType().equals("Pending")) {
-                            reminders.add(transaction);
-                        }
+
+                            Calendar transactionDate = Calendar.getInstance();
+                            transactionDate.set(transaction.getYear(), transaction.getMonth() - 1, transaction.getDay());
+                            if (transactionDate.getTimeInMillis() <= System.currentTimeMillis() - 7 * 24 * 60 * 60 * 1000
+                                    && transaction.getType().equals("Pending")) {
+                                reminders.add(transaction);
+                            }
+
                     }
 
                     // Send notification for each transaction that has passed over 7 days
@@ -84,7 +90,8 @@ public class ForegroundService extends Service  {
                     }
 
                     try {
-                        Thread.sleep(60000); // Check every minute
+                        Thread.sleep(20000); // Check every minute
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -94,6 +101,7 @@ public class ForegroundService extends Service  {
 
         return START_STICKY;
     }
+
 
     private Notification buildNotification(String contentText) {
         Intent notificationIntent = new Intent(this, MainActivity.class);
@@ -140,4 +148,9 @@ public class ForegroundService extends Service  {
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        shouldRunThread = false;
+    }
 }
