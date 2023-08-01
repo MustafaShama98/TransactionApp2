@@ -98,17 +98,6 @@ public class Edittransactionfrag extends Fragment {
             }
         };
 
-//        time.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                TimePickerDialog datePickerDialog = new TimePickerDialog(getContext(),android.R.style.Theme_Holo_Dialog_MinWidth,
-//                        onTimeSetListener
-//                        ,hour,minute,true);
-//                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                datePickerDialog.show();
-//
-//            }
-//        });
 
         onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -131,7 +120,7 @@ public class Edittransactionfrag extends Fragment {
                 //ItemsRecycleAdapter.listner.removeTask(selectedTransaction);
 
                 //Adding to SQL
-                Transaction newTransaction = new Transaction(Integer.parseInt(transanctions),
+                Transaction newTransaction = new Transaction(-1*Integer.parseInt(transanctions),
                         desc,
                         "Pending",
                         false,

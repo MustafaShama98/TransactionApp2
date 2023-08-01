@@ -85,20 +85,21 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 restoredDeletedTransactions = sharedPreferenceViewModel.getRemovedListBySP();
                 // Update the value in the ViewModel
                 if (displayBoxValue) {
+                    if(restoredDeletedTransactions != null) {
+                        for (int i = 0; i < restoredDeletedTransactions.size(); i++)
+                            Log.d("print2", restoredDeletedTransactions.get(i).toString());
+                        // Merge restoredDeletedTransactions with the current list of transactions
+                        currentTransactions = transactionViewModel.getAllTransactionList_normal();
+                        mergedList = new ArrayList<>(currentTransactions);
+                        mergedList.addAll(restoredDeletedTransactions);
 
-                    for (int i = 0; i < restoredDeletedTransactions.size(); i++)
-                        Log.d("print2", restoredDeletedTransactions.get(i).toString());
-                    // Merge restoredDeletedTransactions with the current list of transactions
-                    currentTransactions = transactionViewModel.getAllTransactionList_normal();
-                    mergedList = new ArrayList<>(currentTransactions);
-                    mergedList.addAll(restoredDeletedTransactions);
-
-                    // Update the LiveData with the merged list to display all transactions
-                    transactionViewModel.getMutableAllTransactionList().postValue(mergedList);
+                        // Update the LiveData with the merged list to display all transactions
+                        transactionViewModel.getMutableAllTransactionList().postValue(mergedList);
 
                     // Add restored deleted transactions to the database
                     for (Transaction transaction : restoredDeletedTransactions) {
                         transactionViewModel.insert(transaction);
+                    }
                     }
                 } else {
 

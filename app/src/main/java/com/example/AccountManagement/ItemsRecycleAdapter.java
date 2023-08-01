@@ -71,7 +71,7 @@ public class ItemsRecycleAdapter extends RecyclerView.Adapter<ItemsRecycleAdapte
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Transaction transaction = transactionList.get(position);
         holder.type.setText(transaction.type);
-        holder.titleitem.setText("$"+Integer.toString(transaction.getTitle()));
+        holder.titleitem.setText("$"+Integer.toString(-1*transaction.getTitle()));
 
         holder.describeItem.setText(transaction.getDescription());
         holder.dateItem.setText(transaction.getDay()+"/"+ transaction.getMonth()+"/"+ transaction.getYear());

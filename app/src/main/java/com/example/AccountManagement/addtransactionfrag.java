@@ -85,7 +85,7 @@ public class addtransactionfrag extends Fragment {
                     //Adding to SQL
 
                     Transaction newTransaction = new Transaction(
-                            Integer.parseInt(amount),
+                           -1* Integer.parseInt(amount),
                             desc,
                             type,
                             false,

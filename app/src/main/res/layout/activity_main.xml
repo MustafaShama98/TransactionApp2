@@ -18,7 +18,9 @@
             android:id="@+id/fragContainer"
             class="com.example.AccountManagement.TransactionListFrag"
             android:layout_width="match_parent"
-            android:layout_height="674dp"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_navbar"
+            android:layout_marginBottom="5dp"
             tools:layout="@layout/fragment_transaction_list" />
         <!-- bottom-->
         <com.google.android.material.bottomnavigation.BottomNavigationView
